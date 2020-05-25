@@ -5,14 +5,14 @@ void carregar_grafo(void){
 
     FILE* grafo = fopen("entrada.txt","r");
     char linha[10];
-    int g[2],l[3];
-    int i,j,aux,compar;
+    int g[2],l[3];  //g irá guardar numero de vertices e arestas, respectivamente, enquanto L guardará os 3 dados de cada linha
+    int i,j,aux,compar; 
     fgets(linha,sizeof(linha),grafo);
     i = 0;
     j = 0;
     aux = 0;
-    printf("%s\n",linha);
-    while(linha[i] != '\0'){
+    printf("%s\n",linha);   //teste para verificar se o fgets funcionou
+    while(linha[i] != '\0'){    //laço para definição do número de vértices e arestas
         if(linha[i] == ' '){
             g[j] = aux;
             j++;
@@ -22,15 +22,15 @@ void carregar_grafo(void){
         }
         i++;
     }
-    printf("%d %d\n",g[1],g[2]);
+    printf("%d %d\n",g[1],g[2]);    //teste para verificar se as operações no laço de repetição funcionaram
     int** mat = (int**)malloc(g[1]*sizeof(int*));
     for(i=0;i<g[1];i++)
         mat[i] = (int*)malloc(g[1]*sizeof(int));
     for(i=0;i<g[1];i++){
         for(j=0;j<g[1];j++)
-            mat[i][j] = 0;
+            mat[i][j] = 0;  //a matriz é preenchida com 0
     }
-    while(fgets(linha,sizeof(linha),grafo) != NULL){
+    while(fgets(linha,sizeof(linha),grafo) != NULL){    //laço para posicionamento dos pesos na matriz
         i = 0;
         j = 0;
         aux = 0;
