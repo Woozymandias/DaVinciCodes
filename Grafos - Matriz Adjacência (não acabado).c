@@ -11,7 +11,6 @@ void carregar_grafo(void){
     i = 0;
     j = 0;
     aux = 0;
-    printf("%s",linha);
     while(linha[i] != '\0'){
         if(linha[i] == ' '){
             g[j] = aux;
@@ -22,7 +21,6 @@ void carregar_grafo(void){
         }
         i++;
     }
-    printf("%d %d\n",g[0],g[1]);
     int** mat = (int**)malloc(g[0]*sizeof(int*));
     for(i=0;i<g[0];i++)
         mat[i] = (int*)malloc(g[0]*sizeof(int));
@@ -36,14 +34,19 @@ void carregar_grafo(void){
         aux = 0;
         compar = 0;
         while(linha[i] != '\0'){
-            if(linha[i] == ' '){
+            if(linha[i] == ' ' || linha[i] == '\n'){
                 if(compar == 1)
-                    aux = aux*(-1);
+                    aux = aux * (-1);
                 l[j] = aux;
                 j++;
                 aux = 0;
-            }else if(((int)linha[i] >= 48) && ((int)linha[i] <= 57)){
+            }else if((int)linha[i] >= 48 && (int)linha[i] <= 57){
                 aux = (aux * 10) + ((int)linha[i] - 48);
+                if(linha[i+1] == '\0'){
+                    if(compar == 1)
+                        aux = aux * (-1);
+                    l[j] = aux;
+                }
             }else if((int)linha[i] == 45){
                 compar = 1;
             }
@@ -54,7 +57,7 @@ void carregar_grafo(void){
     }
     for(i=0;i<g[0];i++){
         for(j=0;j<g[0];j++)
-            printf("%d ",mat[i][j]);
+            printf("%-5d",mat[i][j]);
         puts("");
     }
     fclose(grafo);
